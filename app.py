@@ -38,17 +38,19 @@ def register_user():
             return render_template("register.html", form = form)
         session['user'] = new_user.username
         flash(f"Welcome {new_user.first_name}! You succesfully Created Your Account!", "success")
-        return redirect('/secrets')
+        return redirect(f'/users/{new_user.username}')
     
     return render_template("register.html", form = form)
 
-@app.route('/secrets')
-def show_secrets():
+@app.route(f"/users/<username>")
+def show_user(username):
     if 'user' not in session:
         flash("Please login first!", "danger")
         return redirect('/')
+    else:
+        user = User.query.get_or_404(username)
         
-    return render_template('secrets.html')
+    return render_template('user.html', user = user)
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login_user():
@@ -60,7 +62,8 @@ def login_user():
         if user:
             flash(f"Welcome back, {user.first_name}!", "primary")
             session['user'] = user.username
-            return redirect('/secrets')
+            
+            return redirect(f'/users/{user.username}')
     
     return render_template('login.html', form = form)
 

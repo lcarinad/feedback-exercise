@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1 class="text-center my-4">Hi {{user.first_name}}👋🏾</h1>
+<div
+  class="card mx-auto"
+  style="width: 18rem">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <b>Name:</b> {{user.first_name}} {{user.last_name}}
+    </li>
+
+    <li class="list-group-item"><b>Username:</b> {{user.username}}</li>
+
+    <li class="list-group-item"><b>Contact:</b> {{user.email}}</li>
+  </ul>
+
+  <a
+    href="/logout"
+    class="btn btn-outline-info border-0"
+    >Logout</a
+  >
+</div>
+{% endblock %}
