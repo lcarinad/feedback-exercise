@@ -12,6 +12,25 @@
     <li class="list-group-item"><b>Username:</b> {{user.username}}</li>
 
     <li class="list-group-item"><b>Contact:</b> {{user.email}}</li>
+    {% if feedback %} {% for f in feedback %}
+    <li class="list-group-item">
+      <b class="text-dark">{{f.title}}</b>{{f.content}}
+      <a href="/feedback/{{f.id}}/edit">
+        <i class="fa-solid fa-pen-to-square mx-2"></i
+      ></a>
+      <form
+        action="/feedback/{{f.id}}/delete"
+        method="post">
+        <button
+          href="/feedback/{{f.id}}/delete"
+          type="submit"
+          class="btn btn-link">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </form>
+    </li>
+
+    {% endfor %} {% endif %}
   </ul>
 
   <a
@@ -20,4 +39,5 @@
     >Logout</a
   >
 </div>
+<a href="/feedback">Submit Feedback</a>
 {% endblock %}

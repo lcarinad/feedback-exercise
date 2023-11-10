@@ -1,4 +1,4 @@
-from models import User, db, bcrypt
+from models import User, db, bcrypt, Feedback
 from app import app
 
 # Drop and recreate the database
@@ -20,3 +20,8 @@ db.session.add_all([user1, user2, user3])
 
 # Commit the changes
 db.session.commit()
+
+feedback1= Feedback(title='First Post', content="This is my first post!", username = user1)
+feedback2= Feedback(title='Second Post', content="Oh hi again! This is my second post!", username = user1)
+feedback3=Feedback(title='Events Today?', content="Does anyone know of anything cool happening today in town?", username = user2)
+
