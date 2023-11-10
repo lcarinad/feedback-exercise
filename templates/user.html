@@ -40,4 +40,13 @@
   >
 </div>
 <a href="/feedback">Submit Feedback</a>
+<form
+  method="post"
+  action="/users/{{user.username}}/delete">
+  <button
+    type="submit"
+    class="btn btn-danger">
+    Delete User
+  </button>
+</form>
 {% endblock %}

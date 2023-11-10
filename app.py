@@ -67,6 +67,19 @@ def show_user(username):
         feedback = Feedback.query.filter(Feedback.username == session['user'])
         return render_template('user.html', user = user, feedback = feedback)
 
+@app.route("/users/<username>/delete", methods=['POST'])
+def delete_user(username):  
+    if 'user' not in session:
+        flash("Please login first!", "danger")
+        return redirect('/')
+    user=User.query.get_or_404(username)
+    if user.username == session['user']:
+        db.session.delete(user)
+        db.session.commit() 
+        session.pop('user')
+        flash("User deleted","success")
+        return redirect('/register')
+
 @app.route("/feedback", methods=['POST', 'GET'])
 def submit_feedbackform():
     if "user" not in session:
@@ -123,3 +136,4 @@ def logout_user():
     session.pop('user')
     flash(f"Goodbye✌🏾", "info")
     return redirect('/')
+
